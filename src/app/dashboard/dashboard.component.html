@@ -168,14 +168,17 @@
 </div>
 
 <div class="container border p-3">
-  <button
-  type="button"
-  class="btn btn-primary btn-sm mb-2"
-  (click)="addDataArr()"
->
-  Add
-</button>
+
   <form [formGroup]="filterform">
+    <div class="form-group">
+      <button
+        type="button"
+        class="btn btn-primary offset-md-11 btn-sm mb-2 float-right"
+        (click)="addDataArr()"
+      >
+        Add New
+      </button>
+    </div>
     <div
       formArrayName="items"
       *ngFor="let item of filterform.get('items')['controls']; let i = index"
@@ -234,22 +237,23 @@
               <!-- <input type="text" class="form-control"  [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="1"/> -->
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-4">
             <div class="form-group">
               <label>Amount</label>
               <input
                 type="text"
                 formControlName="amount"
                 class="form-control"
+                disabled
               />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div>
-      <div class="col-md-2">Total Amount</div>
-      <div class="col-md-3">{{ gtotal }}</div>
+    <div class="offset-md-8 d-flex my-4 alert alert-success">
+      <div class="col-md-4">Total Amount:- </div>
+      <div class="col-md-3"> <strong>Rs.&nbsp;{{ gtotal }}.00</strong></div>
     </div>
     <div class="col-2">
       <div class="form-group row">
@@ -260,7 +264,6 @@
         >
           Remove
         </button> -->
-
       </div>
     </div>
   </form>
