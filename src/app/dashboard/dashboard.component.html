@@ -1,0 +1,267 @@
+<!-- <div class="container-fluid bg-success text-center py-4 text-white">
+  <h2>Test-Angular</h2>
+</div>
+<div class="container my-4">
+  <div class="row border">
+    <h1 class="h1">Username:{{ username }}</h1>
+
+    <table class="table">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>BillNo:1</td>
+            </tr>
+            <tr>
+              <td>Bill Date:-{{ todaysdate }}</td>
+            </tr>
+            <tr>
+              <td class="py-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  #memno
+                  placeholder="Memeber No."
+                />
+              </td>
+              <td>
+                <span
+                  >&nbsp;<button
+                    class="btn btn-primary"
+                    (click)="getMember(memno)"
+                  >
+                    GET
+                  </button></span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td class="h4 py-3">FirmName:-{{ memberData?.firmName }}</td>
+              <td class="h4">SrNo:-{{ memberData?.srNo }}</td>
+            </tr>
+          </table>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Particular</th>
+                <th>Rate</th>
+                <th>Qty</th>
+                <th>Amount</th>
+                <th>Add</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <select
+                    (change)="getPericularById($event)"
+                    class="form-control"
+                  >
+                    <option value="">Select Perticular</option>
+                    <option
+                      *ngFor="let pert of perticularData"
+                      value="{{ pert.itemSrNo }}"
+                    >
+                      {{ pert.itemName }}
+                    </option>
+                  </select>
+                </td>
+                <td>{{ ptbyid?.charges }}</td>
+                <td>
+                  <input
+                    class="form-control col-md-1"
+                    type="text"
+                    #inpqty
+                    (keyup)="gettotal(inpqty)"
+                  />
+                </td>
+                <td>{{ gtotal }}</td>
+                <td>
+                  <button class="btn btn-success">Add</button>
+                </td>
+                <td>Remove</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>Net Total:-</td>
+                <td>
+                  <span class="float-right">
+                    <input
+                      type="text"
+                      disabled
+                      class="form-control"
+                      value="{{ gtotal }}"
+                    />
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div> -->
+<div class="container-fluid bg-success text-center py-4 text-white">
+  <h2>Test-Angular</h2>
+</div>
+<div class="container my-4">
+  <div class="row border p-4 bg-light">
+    <h1 class="h4">Username:{{ username }}</h1>
+    <hr />
+    <table class="table">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>BillNo:1</td>
+            </tr>
+            <tr>
+              <td>Bill Date:-{{ todaysdate | date: "dd/MM/yyyy" }}</td>
+            </tr>
+            <tr>
+              <td class="py-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  #memno
+                  placeholder="Memeber No."
+                />
+              </td>
+              <td>
+                <span
+                  >&nbsp;<button
+                    class="btn btn-primary"
+                    (click)="getMember(memno)"
+                  >
+                    GET
+                  </button></span
+                >
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td class="h4 py-3">
+                FirmName:-<strong>{{ memberData?.firmName }}</strong>
+              </td>
+              <td class="h4">
+                &nbsp;SrNo:-<strong>{{ memberData?.srNo }}</strong>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="container border p-3">
+  <button
+  type="button"
+  class="btn btn-primary btn-sm mb-2"
+  (click)="addDataArr()"
+>
+  Add
+</button>
+  <form [formGroup]="filterform">
+    <div
+      formArrayName="items"
+      *ngFor="let item of filterform.get('items')['controls']; let i = index"
+    >
+      <div [formGroupName]="i" class="form-group row">
+        <div class="row">
+          <div class="col-1">
+            <div class="form-group">
+              <label>SrNo.</label>
+              <input
+                type="text"
+                class="form-control"
+                disabled
+                formControlName="srNo"
+                placeholder="{{ i + 1 }}"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label>Perticular</label>
+              <select
+                (change)="getPericularById($event, i)"
+                formControlName="particular"
+                class="form-control"
+              >
+                <option value="">Select Perticular</option>
+                <option
+                  *ngFor="let pert of perticularData"
+                  value="{{ pert.itemSrNo }}"
+                >
+                  {{ pert.itemName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <label>Charge</label>
+            <input
+              type="text"
+              class="form-control"
+              disabled
+              formControlName="charge"
+            />
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>Qty</label>
+              <input
+                class="form-control col-md-1"
+                type="text"
+                formControlName="qty"
+                #inpqty
+                (keyup)="gettotal(i)"
+              />
+              <!-- <input type="text" class="form-control"  [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="1"/> -->
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>Amount</label>
+              <input
+                type="text"
+                formControlName="amount"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-md-2">Total Amount</div>
+      <div class="col-md-3">{{ gtotal }}</div>
+    </div>
+    <div class="col-2">
+      <div class="form-group row">
+        <!-- <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="removeDataArr()"
+        >
+          Remove
+        </button> -->
+
+      </div>
+    </div>
+  </form>
+</div>

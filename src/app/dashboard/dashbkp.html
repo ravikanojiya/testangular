@@ -1,0 +1,98 @@
+<form #addressForm="ngForm" (ngSubmit)="logValue()">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <section
+          class="container border mb-4 p-3"
+          *ngFor="let address of datarow; let i = index"
+        >
+          <div class="row">
+            <div class="col-1">
+              <div class="form-group">
+                <label>SrNo.</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  [(ngModel)]="address.address"
+                  name="address_{{ address.id }}"
+                  placeholder="{{ i + 1 }}"
+                />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Perticular</label>
+                <select (change)="getPericularById($event)" class="form-control">
+                  <option value="">Select Perticular</option>
+                  <option
+                    *ngFor="let pert of perticularData"
+                    value="{{ pert.itemSrNo }}"
+                  >
+                    {{ pert.itemName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <label>Charge</label>
+              <input
+                type="text"
+                class="form-control"
+                disabled
+                [(ngModel)]="address.address"
+                name="address_{{ address.id }}"
+                placeholder="1"
+                value="{{ ptbyid?.charges }}"
+              />
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label>Qty</label>
+                <input
+                  class="form-control col-md-1"
+                  type="text"
+                  #inpqty
+                  (keyup)="gettotal(inpqty)"
+                />
+                <!-- <input type="text" class="form-control"  [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="1"/> -->
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label>Amount</label>
+                <input type="text" class="form-control" value="{{ gtotal }}" />
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group row">
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="removeDataArr(i)"
+                >
+                  Remove
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm mb-2"
+                  (click)="addDataArr(i)"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="col-md-2">Total Amount</div>
+            <div class="col-md-3">{{ gtotal }}</div>
+          </div>
+        </section>
+        <div class="container text-right my-2">
+          <input type="submit" class="btn btn-warning" value="Clear" />&nbsp;
+          <input type="button" class="btn btn-success" value="Save" />&nbsp;
+          <input type="button" class="btn btn-info" value="List" />&nbsp;
+          <input type="button" class="btn btn-danger" value="Close" />&nbsp;
+        </div>
+      </div>
+    </div>
+  </form>

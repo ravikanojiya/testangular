@@ -1,0 +1,14 @@
+<form [formGroup]="loginForm" (ngSubmit)="saveData()" >
+
+<table>
+  <tr>
+    <td><input type="text" formControlName="username"></td>
+  </tr>
+  <tr>
+    <td><input type="password" formControlName="password"></td>
+  </tr>
+  <tr>
+    <td><input type="submit" value="Login"></td>
+  </tr>
+</table>
+</form>
