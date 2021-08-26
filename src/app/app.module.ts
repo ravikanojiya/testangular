@@ -6,21 +6,18 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MemberloginComponent } from './memberlogin/memberlogin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    MemberloginComponent,
-  ],
+  declarations: [AppComponent, DashboardComponent, MemberloginComponent],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

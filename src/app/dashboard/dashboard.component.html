@@ -168,7 +168,7 @@
 </div>
 
 <div class="container border p-3">
-  <form [formGroup]="filterform" (ngSubmit)="saveBill()">
+  <form [formGroup]="filterform">
     <div class="form-group">
       <button
         type="button"
@@ -177,6 +177,7 @@
       >
         Add New
       </button>
+
     </div>
     <div
       formArrayName="items"
@@ -191,8 +192,8 @@
                 type="text"
                 class="form-control"
                 disabled
+                [(ngModel)]="srno[i]"
                 formControlName="srNo"
-                placeholder="{{ i + 1 }}"
               />
             </div>
           </div>
@@ -236,7 +237,7 @@
               <!-- <input type="text" class="form-control"  [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="1"/> -->
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-2">
             <div class="form-group">
               <label>Amount</label>
               <input
@@ -245,8 +246,23 @@
                 class="form-control"
                 disabled
               />
+
+
             </div>
+
           </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>Remove Row</label>
+          <button
+          type="button"
+          class="btn btn-danger btn-sm form-control"
+          (click)="removeDataArr(i)"
+        >
+          Remove
+        </button>
+      </div>
+      </div>
         </div>
       </div>
     </div>
@@ -257,18 +273,10 @@
       </div>
     </div>
     <div class="col-2">
-      <div class="form-group row">
-        <!-- <button
-          type="button"
-          class="btn btn-danger btn-sm"
-          (click)="removeDataArr()"
-        >
-          Remove
-        </button> -->
-      </div>
 
-      <button class="btn btn-warning btn-sm">Clear</button>&nbsp;
-      <button class="btn btn-success btn-sm" type="submit">Save</button>&nbsp;
+
+      <button class="btn btn-warning btn-sm" (click)="clearBill()">Clear</button>&nbsp;
+      <button class="btn btn-success btn-sm" (click)="saveBill()">Save</button>&nbsp;
       <button class="btn btn-info btn-sm" (click)="getList()">List</button
       >&nbsp; <button class="btn btn-danger btn-sm">Close</button>&nbsp;
     </div>
@@ -276,22 +284,22 @@
 </div>
 <div class="container my-4" *ngIf="billdata">
   <h3>Bill List</h3>
-<table class="table table-bordered" >
-  <thead>
-    <tr>
-      <th>MemSrNo</th>
-      <th>Date</th>
-      <th>Bill No</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let bd of billdata">
-      <td>{{ bd.memSrNo +1}}</td>
-      <td>{{ bd.insertDT | date: "dd/MM/yyyy"}}</td>
-      <td>{{ bd.rSrNo }}</td>
-      <td>{{ bd.amount }}</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>MemSrNo</th>
+        <th>Date</th>
+        <th>Bill No</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bd of billdata">
+        <td>{{ bd.memSrNo + 1 }}</td>
+        <td>{{ bd.insertDT | date: "dd/MM/yyyy" }}</td>
+        <td>{{ bd.rSrNo }}</td>
+        <td>{{ bd.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

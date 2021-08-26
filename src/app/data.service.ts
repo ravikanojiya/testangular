@@ -83,12 +83,26 @@ export class DataService {
   getBillList(): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization:
+      'Authorization':
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5ODI1MDk4MjUwIiwiTmFtZSI6Iktpc2hhbiBQYXJtYXIiLCJNb2JpbGUiOiI5ODI1MDk4MjUwIiwiVXNlck5hbWUiOiI5ODI1MDk4MjUwIiwiSUQiOiIxIiwiUm9sZSI6IlVzZXIiLCJEYXRlT2ZKb2luZyI6IjIwMjEtMDgtMjUiLCJqdGkiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUGF0aWVudCIsImV4cCI6MTY2MTQzMzI4NiwiaXNzIjoicngxMDguaW4iLCJhdWQiOiJyeDEwOC5pbiJ9.md1RIrzi4fyb-h7uXps7HzXIiuZeU2XMt0WTrEgcRFQ',
     });
     let options = { headers: headers };
     return this.http
       .get<any[]>(environment.Base_Url + 'ADA2021/GetBill', {
+        headers: headers,
+      })
+      .pipe(map((res: any) => res));
+  }
+
+  billsaved(body: any): Observable<any[]> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5ODI1MDk4MjUwIiwiTmFtZSI6Iktpc2hhbiBQYXJtYXIiLCJNb2JpbGUiOiI5ODI1MDk4MjUwIiwiVXNlck5hbWUiOiI5ODI1MDk4MjUwIiwiSUQiOiIxIiwiUm9sZSI6IlVzZXIiLCJEYXRlT2ZKb2luZyI6IjIwMjEtMDgtMjUiLCJqdGkiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUGF0aWVudCIsImV4cCI6MTY2MTQzMzI4NiwiaXNzIjoicngxMDguaW4iLCJhdWQiOiJyeDEwOC5pbiJ9.md1RIrzi4fyb-h7uXps7HzXIiuZeU2XMt0WTrEgcRFQ',
+    });
+    let options = { headers: headers };
+    return this.http
+      .post<any[]>(environment.Base_Url + `ADA2021/BillSave`, body, {
         headers: headers,
       })
       .pipe(map((res: any) => res));
